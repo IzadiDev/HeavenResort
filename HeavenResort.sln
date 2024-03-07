@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeavenResort_VillaAPI", "HeavenResort_VillaAPI\HeavenResort_VillaAPI.csproj", "{DF43852C-082D-48CA-B2F5-8074FA715B4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF43852C-082D-48CA-B2F5-8074FA715B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF43852C-082D-48CA-B2F5-8074FA715B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF43852C-082D-48CA-B2F5-8074FA715B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF43852C-082D-48CA-B2F5-8074FA715B4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3EC54E11-B261-4A87-8849-3D64FE061FF8}
+	EndGlobalSection
+EndGlobal
