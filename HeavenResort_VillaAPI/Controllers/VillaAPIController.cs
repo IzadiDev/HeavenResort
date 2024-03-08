@@ -1,6 +1,7 @@
 ﻿using HeavenResort_VillaAPI.Data;
 using HeavenResort_VillaAPI.Models;
 using HeavenResort_VillaAPI.Models.DTO;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -108,6 +109,27 @@ namespace HeavenResort_VillaAPI.Controllers
             return NoContent();
         }
 
+
+        [HttpPatch("{id:int}", Name ="UpdatePartialVilla")]
+        public IActionResult UpdatePartialVilla(int id, JsonPatchDocument<VillaDTO> patchDTO)
+        {
+            if(patchDTO == null || id == 0)
+            {
+                return BadRequest("Data is invalid!");
+            }
+            var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
+            if(villa == null)
+            {
+                return BadRequest("Villa not found!");
+            }
+            patchDTO.ApplyTo(villa, ModelState);
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return NoContent() ;
+
+        }
 
     }
 }
