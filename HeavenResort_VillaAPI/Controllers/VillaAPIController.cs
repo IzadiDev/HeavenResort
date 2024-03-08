@@ -2,6 +2,7 @@
 using HeavenResort_VillaAPI.Models;
 using HeavenResort_VillaAPI.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace HeavenResort_VillaAPI.Controllers
 {
@@ -46,6 +47,15 @@ namespace HeavenResort_VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<VillaDTO> CreateVilla([FromBody]VillaDTO villaDTO)
         {
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            if(VillaStore.villaList.FirstOrDefault(u => u.Name.ToLower() == villaDTO.Name.ToLower()) != null){
+                ModelState.AddModelError("Insert Error", "The name already exist in database");
+                return BadRequest(ModelState);
+            }
             if (villaDTO == null)
             {
                 return BadRequest(villaDTO);
