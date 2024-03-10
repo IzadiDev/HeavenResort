@@ -1,6 +1,8 @@
-﻿using HeavenResort_VillaAPI.Data;
+﻿using AutoMapper;
+using HeavenResort_VillaAPI.Data;
 using HeavenResort_VillaAPI.Models;
 using HeavenResort_VillaAPI.Models.DTO;
+using HeavenResort_VillaAPI.Repository.IRepository;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,19 +14,21 @@ namespace HeavenResort_VillaAPI.Controllers
     [ApiController]
     public class VillaAPIController:ControllerBase
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IVillaRepository _dbVilla;
         private readonly ILogger<VillaAPIController> _logger;
-        public VillaAPIController(ILogger<VillaAPIController> logger, ApplicationDbContext db)
+        private readonly IMapper _mapper;
+        public VillaAPIController(ILogger<VillaAPIController> logger, IVillaRepository dbVilla, IMapper mapper)
         {
 
             _logger = logger;
-            _db = db;
+            _dbVilla = dbVilla;
+            _mapper = mapper;
         }
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<VillaDTO>>> GetVillas()
         {
-            return Ok(await _db.Villas.ToListAsync());
+            return Ok(await _dbVilla.GetAllAsync());
         }
 
         [HttpGet("{id:int}", Name = "GetVilla")]
@@ -35,7 +39,7 @@ namespace HeavenResort_VillaAPI.Controllers
         {
             if (id > 0)
             {
-                var villa = await _db.Villas.FirstOrDefaultAsync(u => u.Id == id);
+                var villa = await _dbVilla.GetAsync(filter:u => u.Id == id);
                 if (villa != null)
                 {
                     return Ok(villa);
@@ -62,7 +66,7 @@ namespace HeavenResort_VillaAPI.Controllers
             //    return BadRequest(ModelState);
             //}
 
-            if (await _db.Villas.FirstOrDefaultAsync(u => u.Name.ToLower() == villaDTO.Name.ToLower()) != null)
+            if (await _dbVilla.GetAsync(filter:u => u.Name.ToLower() == villaDTO.Name.ToLower()) != null)
             {
                 ModelState.AddModelError("Insert Error", "The name already exist in database");
                 return BadRequest(ModelState);
@@ -71,21 +75,8 @@ namespace HeavenResort_VillaAPI.Controllers
             {
                 return BadRequest(villaDTO);
             }
-          
-            Villa villa = new Villa
-            {
-                Name = villaDTO.Name,
-                Details = villaDTO.Details,
-                Sqft = villaDTO.Sqft,
-                Amenity = villaDTO.Amenity,
-                CreatedDate = DateTime.Now,
-                UpdatedDate = DateTime.Now,
-                ImageUrl = villaDTO.ImageUrl,
-                Occupancy = villaDTO.Occupancy,
-                Rate = villaDTO.Rate,
-            };
-            await _db.Villas.AddAsync(villa);
-            await _db.SaveChangesAsync();
+            Villa villa = _mapper.Map<Villa>(villaDTO);
+            await _dbVilla.CreateAsync(villa);
 
             return CreatedAtRoute("GetVilla", new { id = villa.Id }, villa);
         }
@@ -100,13 +91,12 @@ namespace HeavenResort_VillaAPI.Controllers
             {
                 return BadRequest("The id is invalid😕");
             }
-            var villa = await _db.Villas.FirstOrDefaultAsync(u => u.Id == id);
+            var villa = await _dbVilla.GetAsync(filter:u => u.Id == id);
             if (villa == null)
             {
                 return NotFound("The id you entered does not exist in database");
             }
-            _db.Villas.Remove(villa);
-            await _db.SaveChangesAsync();
+            await _dbVilla.RemoveAsync(villa);
             return NoContent();
         }
 
@@ -124,20 +114,8 @@ namespace HeavenResort_VillaAPI.Controllers
             //villa.Name = villaDTO.Name;
             //villa.Sqft = villaDTO.Sqft;
             //villa.Occupancy = villaDTO.Occupancy;
-            Villa villa = new Villa
-            {
-                Id = villaDTO.Id,
-                Name = villaDTO.Name,
-                Details = villaDTO.Details,
-                Sqft = villaDTO.Sqft,
-                Amenity = villaDTO.Amenity,
-                UpdatedDate = DateTime.Now,
-                ImageUrl = villaDTO.ImageUrl,
-                Occupancy = villaDTO.Occupancy,
-                Rate = villaDTO.Rate,
-            };
-            _db.Villas.Update(villa);
-            await _db.SaveChangesAsync();
+            Villa villa = _mapper.Map<Villa>(villaDTO);
+            await _dbVilla.UpdateAsync(villa);
             return NoContent();
         }
 
@@ -151,37 +129,16 @@ namespace HeavenResort_VillaAPI.Controllers
             {
                 return BadRequest("Data is invalid!");
             }
-            var villa = _db.Villas.AsNoTracking().FirstOrDefault(u => u.Id == id);
-            VillaUpdateDTO villaDTO = new VillaUpdateDTO
-            {
-                Id = villa.Id,
-                Name = villa.Name,
-                Details = villa.Details,
-                Sqft = villa.Sqft,
-                Amenity = villa.Amenity,
-                ImageUrl = villa.ImageUrl,
-                Occupancy = villa.Occupancy,
-                Rate = villa.Rate,
-            };
+            var villa = _dbVilla.GetAsync(filter:u => u.Id == id,tracked:false);
+            VillaUpdateDTO villaDTO = _mapper.Map<VillaUpdateDTO>(villa);
+       
             if (villa == null)
             {
                 return BadRequest("Villa not found!");
             }
             patchDTO.ApplyTo(villaDTO, ModelState);
-            Villa model = new Villa
-            {
-                Id = villaDTO.Id,
-                Name = villaDTO.Name,
-                Details = villaDTO.Details,
-                Sqft = villaDTO.Sqft,
-                Amenity = villaDTO.Amenity,
-                UpdatedDate = DateTime.Now,
-                ImageUrl = villaDTO.ImageUrl,
-                Occupancy = villaDTO.Occupancy,
-                Rate = villaDTO.Rate,
-            };
-            _db.Villas.Update(model);
-            await _db.SaveChangesAsync();
+            Villa model = _mapper.Map<Villa>(villaDTO);
+            await _dbVilla.UpdateAsync(model);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

@@ -1,5 +1,7 @@
 using HeavenResort_VillaAPI;
 using HeavenResort_VillaAPI.Data;
+using HeavenResort_VillaAPI.Repository;
+using HeavenResort_VillaAPI.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 //Configure AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 //End Of Configure AutoMapper
+
+//Repository Service
+builder.Services.AddScoped<IVillaRepository, VillaRepository>();
+//End Of Repository Service
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection")));
 builder.Services.AddControllers(option =>
 {
