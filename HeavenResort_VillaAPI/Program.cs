@@ -1,4 +1,4 @@
-
+using HeavenResort_VillaAPI;
 using HeavenResort_VillaAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 //Serilog Configuration
 //Log.Logger = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File("log/villaLogs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
 //builder.Host.UseSerilog();
+
+//Configure AutoMapper
+builder.Services.AddAutoMapper(typeof(MappingConfig));
+//End Of Configure AutoMapper
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection")));
 builder.Services.AddControllers(option =>
 {
