@@ -4,6 +4,7 @@ using HeavenResort_VillaAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HeavenResort_VillaAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240311181045_AddedVillaNumber")]
+    partial class AddedVillaNumber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,66 +73,66 @@ namespace HeavenResort_VillaAPI.Migrations
                         {
                             Id = 1,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 3, 11, 23, 15, 10, 102, DateTimeKind.Local).AddTicks(2157),
+                            CreatedDate = new DateTime(2024, 3, 11, 21, 40, 44, 520, DateTimeKind.Local).AddTicks(6262),
                             Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
                             ImageUrl = "~/Assets/Villa1.jpg",
                             Name = "Royal Villa",
                             Occupancy = 5,
                             Rate = 200.0,
                             Sqft = 550,
-                            UpdatedDate = new DateTime(2024, 3, 11, 23, 15, 10, 102, DateTimeKind.Local).AddTicks(2157)
+                            UpdatedDate = new DateTime(2024, 3, 11, 21, 40, 44, 520, DateTimeKind.Local).AddTicks(6263)
                         },
                         new
                         {
                             Id = 2,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 3, 11, 23, 15, 10, 102, DateTimeKind.Local).AddTicks(2160),
+                            CreatedDate = new DateTime(2024, 3, 11, 21, 40, 44, 520, DateTimeKind.Local).AddTicks(6265),
                             Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
                             ImageUrl = "~/Assets/Villa2.jpg",
                             Name = "Luxury Villa",
                             Occupancy = 3,
                             Rate = 300.0,
                             Sqft = 400,
-                            UpdatedDate = new DateTime(2024, 3, 11, 23, 15, 10, 102, DateTimeKind.Local).AddTicks(2160)
+                            UpdatedDate = new DateTime(2024, 3, 11, 21, 40, 44, 520, DateTimeKind.Local).AddTicks(6266)
                         },
                         new
                         {
                             Id = 3,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 3, 11, 23, 15, 10, 102, DateTimeKind.Local).AddTicks(2163),
+                            CreatedDate = new DateTime(2024, 3, 11, 21, 40, 44, 520, DateTimeKind.Local).AddTicks(6268),
                             Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
                             ImageUrl = "~/Assets/Villa3.jpg",
                             Name = "Royal Villa",
                             Occupancy = 4,
                             Rate = 400.0,
                             Sqft = 600,
-                            UpdatedDate = new DateTime(2024, 3, 11, 23, 15, 10, 102, DateTimeKind.Local).AddTicks(2163)
+                            UpdatedDate = new DateTime(2024, 3, 11, 21, 40, 44, 520, DateTimeKind.Local).AddTicks(6269)
                         },
                         new
                         {
                             Id = 4,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 3, 11, 23, 15, 10, 102, DateTimeKind.Local).AddTicks(2165),
+                            CreatedDate = new DateTime(2024, 3, 11, 21, 40, 44, 520, DateTimeKind.Local).AddTicks(6271),
                             Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
                             ImageUrl = "~/Assets/Villa4.jpg",
                             Name = "Royal Villa",
                             Occupancy = 2,
                             Rate = 400.0,
                             Sqft = 250,
-                            UpdatedDate = new DateTime(2024, 3, 11, 23, 15, 10, 102, DateTimeKind.Local).AddTicks(2166)
+                            UpdatedDate = new DateTime(2024, 3, 11, 21, 40, 44, 520, DateTimeKind.Local).AddTicks(6272)
                         },
                         new
                         {
                             Id = 5,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 3, 11, 23, 15, 10, 102, DateTimeKind.Local).AddTicks(2168),
+                            CreatedDate = new DateTime(2024, 3, 11, 21, 40, 44, 520, DateTimeKind.Local).AddTicks(6274),
                             Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
                             ImageUrl = "~/Assets/Villa5.jpg",
                             Name = "Royal Villa",
                             Occupancy = 3,
                             Rate = 100.0,
                             Sqft = 200,
-                            UpdatedDate = new DateTime(2024, 3, 11, 23, 15, 10, 102, DateTimeKind.Local).AddTicks(2169)
+                            UpdatedDate = new DateTime(2024, 3, 11, 21, 40, 44, 520, DateTimeKind.Local).AddTicks(6275)
                         });
                 });
 
@@ -148,30 +151,9 @@ namespace HeavenResort_VillaAPI.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("VillaID")
-                        .HasColumnType("int");
-
                     b.HasKey("VillaNo");
 
-                    b.HasIndex("VillaID");
-
                     b.ToTable("VillaNumbers");
-                });
-
-            modelBuilder.Entity("HeavenResort_VillaAPI.Models.VillaNumber", b =>
-                {
-                    b.HasOne("HeavenResort_VillaAPI.Models.Villa", "Villa")
-                        .WithMany("VillaNumbers")
-                        .HasForeignKey("VillaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Villa");
-                });
-
-            modelBuilder.Entity("HeavenResort_VillaAPI.Models.Villa", b =>
-                {
-                    b.Navigation("VillaNumbers");
                 });
 #pragma warning restore 612, 618
         }

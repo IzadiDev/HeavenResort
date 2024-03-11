@@ -17,5 +17,8 @@ namespace HeavenResort_VillaAPI.Models
         public string Amenity { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime UpdatedDate { get; set; } = DateTime.Now;
+        #region Relations
+        public List<VillaNumber> VillaNumbers { get; set; }
+        #endregion
     }
 }

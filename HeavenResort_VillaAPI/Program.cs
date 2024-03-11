@@ -18,6 +18,7 @@ builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 //Repository Service
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
+builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
 //End Of Repository Service
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection")));
