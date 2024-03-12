@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeavenResort_VillaAPI", "HeavenResort_VillaAPI\HeavenResort_VillaAPI.csproj", "{DF43852C-082D-48CA-B2F5-8074FA715B4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeavenResort_VillaAPI", "HeavenResort_VillaAPI\HeavenResort_VillaAPI.csproj", "{DF43852C-082D-48CA-B2F5-8074FA715B4B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeavenResort_Web", "HeavenResort_Web\HeavenResort_Web.csproj", "{14AE4019-C91F-4EFB-B24A-A17F56AA992E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeavenResort_Utility", "HeavenResort_Utility\HeavenResort_Utility.csproj", "{157A312A-977A-4D15-B6C8-2F14DFD5B4DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{DF43852C-082D-48CA-B2F5-8074FA715B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF43852C-082D-48CA-B2F5-8074FA715B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF43852C-082D-48CA-B2F5-8074FA715B4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14AE4019-C91F-4EFB-B24A-A17F56AA992E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14AE4019-C91F-4EFB-B24A-A17F56AA992E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14AE4019-C91F-4EFB-B24A-A17F56AA992E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14AE4019-C91F-4EFB-B24A-A17F56AA992E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{157A312A-977A-4D15-B6C8-2F14DFD5B4DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{157A312A-977A-4D15-B6C8-2F14DFD5B4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{157A312A-977A-4D15-B6C8-2F14DFD5B4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{157A312A-977A-4D15-B6C8-2F14DFD5B4DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
