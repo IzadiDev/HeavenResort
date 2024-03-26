@@ -12,21 +12,21 @@
                 <label asp-for="Name" class="control-label pt-2" style="font-size: 20px;"></label>
             </div>
             <div class="col-10 mb-2">
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" disabled/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="col-2">
                 <label asp-for="Rate" class="control-label pt-2" style="font-size: 20px;"></label>
             </div>
             <div class="col-10 mb-2">
-                <input asp-for="Rate" class="form-control" />
+                <input asp-for="Rate" class="form-control" disabled />
                 <span asp-validation-for="Rate" class="text-danger"></span>
             </div>
             <div class="col-2">
                 <label asp-for="Details" class="control-label pt-2" style="font-size: 20px;"></label>
             </div>
             <div class="col-10 mb-2">
-                <textarea asp-for="Details" class="form-control" rows="5"></textarea>
+                <textarea asp-for="Details" class="form-control" rows="5" disabled></textarea>
                 <span asp-validation-for="Details" class="text-danger"></span>
             </div>
             <div class="col-5 offset-2">

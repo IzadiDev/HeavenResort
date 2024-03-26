@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HeavenResort_VillaAPI.Models
@@ -13,6 +14,7 @@ namespace HeavenResort_VillaAPI.Models
         #region Relation
         [ForeignKey(nameof(Villa))]
         public int VillaID { get; set; }
+        [JsonIgnore]
         public Villa Villa { get; set; }
         #endregion
     }
