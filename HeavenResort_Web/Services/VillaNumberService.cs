@@ -29,9 +29,7 @@ namespace HeavenResort_Web.Services
             return await SendAsync<T>(new APIRequest
             {
                 APIType= APIType.DELETE,
-                URL = villaURL + "/api/VillaNumberAPI/" + id,
-                Data = id
-                
+                URL = villaURL + "/api/VillaNumberAPI/" + id
             });
         }
 

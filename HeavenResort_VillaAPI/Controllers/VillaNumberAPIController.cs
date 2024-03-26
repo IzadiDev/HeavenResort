@@ -33,7 +33,7 @@ namespace HeavenResort_VillaAPI.Controllers
         {
             try
             {
-               IEnumerable<VillaNumber> villaNumbers = await _dbVillaNumber.GetAllAsync();
+               IEnumerable<VillaNumber> villaNumbers = await _dbVillaNumber.GetAllAsync(includeProperties: "Villa");
                 _response.StatusCode = HttpStatusCode.OK;
                 _response.IsSuccess = true;
                 _response.Result = _mapper.Map<List<VillaNumberDTO>>(villaNumbers);
